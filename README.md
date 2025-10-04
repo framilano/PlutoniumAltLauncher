@@ -40,11 +40,11 @@ You can change this folder structure editing the `plutonium_deck_launcher.json` 
 
     `PROTON_NO_ESYNC=1 PROTON_NO_FSYNC=1 %command%`
 
-5.5 With NTSYNC on kernel >6.14 and `Proton-GE` integrating it by default there's no more need for these launch arguments. You still can't use NTSYNC on Steam Deck until Valve updates the kernel, but if you're using another Arch based distro you're good to go.
+5.5. With NTSYNC on kernel >6.14 and `Proton-GE` integrating it by default there's no more need for these launch arguments. You still can't use NTSYNC on Steam Deck until Valve updates the kernel, but if you're using another Arch based distro you're good to go.
 
-7. Back in `Gaming Mode` and open the newly created shortcut, if everything's okay, you should be able to see the Deck Launcher. You need to download the necessary Plutonium online files first, so just touch/click on CLASSIC PLUTONIUM on top and let it configure the proton bottle with all the necessary Plutonium files.
-8. Eventually the download will end and the usual "official" Plutonium launcher should launch, login and setup the game paths from there if you need to play online.
-9. You need to install through `Protontricks` the `xact` audio library to have all sound fx on BO1
+6. Back in `Gaming Mode` and open the newly created shortcut, if everything's okay, you should be able to see the Deck Launcher. You need to download the necessary Plutonium online files first, so just touch/click on CLASSIC PLUTONIUM on top and let it configure the proton bottle with all the necessary Plutonium files.
+7. Eventually the download will end and the usual "official" Plutonium launcher should launch, login and setup the game paths from there if you need to play online.
+8. You need to install through `Protontricks` the `xact` audio library to have all sound fx on BO1
 10. Exit PlutoniumDeckLauncher and open it back, now all shortcuts are available to use!
 
 ## Configuration
