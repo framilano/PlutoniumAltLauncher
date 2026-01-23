@@ -1,5 +1,7 @@
 # PlutoniumDeckLauncher
 
+### WIP: I'm completely re-doing this project using Avalonia! And it will support other resolutions besides 1280x800 (So Steam Machine will look cool too). Stay tuned!
+
 A straightforward launcher mainly developed for Steam Deck, but can be used wherever Plutonium is supported.
 
 The main objective is giving a shortcut to play offline Call of Duty Plutonium-supported titles.
