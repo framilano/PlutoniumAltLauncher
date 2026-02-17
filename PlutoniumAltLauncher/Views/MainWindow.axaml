@@ -1,0 +1,56 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PlutoniumAltLauncher.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="800"
+        x:Class="PlutoniumAltLauncher.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="PlutoniumAltLauncher">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        
+        <Button HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Name="PlutoniumOnline" Click="LaunchGame_OnClick">Launch Plutonium (online only)</Button>
+
+        <Button HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Name="PlutoniumT4SPZM" Click="LaunchGame_OnClick">Launch World at War (SP/ZM)</Button>
+        <Button HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Name="PlutoniumT4MP" Click="LaunchGame_OnClick">Launch World at War (MP)</Button>
+        
+        <Button HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" Name="PlutoniumT5SPZM" Click="LaunchGame_OnClick">Launch Black Ops 1 (SP/ZM)</Button>
+        <Button HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Name="PlutoniumT5MP" Click="LaunchGame_OnClick">Launch Black Ops 1 (MP)</Button>
+        
+        <Button HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" Name="PlutoniumT6ZM" Click="LaunchGame_OnClick">Launch Black Ops 2 (ZM)</Button>
+        <Button HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1" Name="PlutoniumT6MP" Click="LaunchGame_OnClick">Launch Black Ops 2 (MP)</Button>
+        
+        <Button HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" Name="PlutoniumIW5SP" Click="LaunchGame_OnClick">Launch Modern Warfare 3 (SP)</Button>
+        <Button HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" Name="PlutoniumIW5MP" Click="LaunchGame_OnClick">Launch Modern Warfare 3 (MP)</Button>
+        
+        <Button HorizontalAlignment="Center" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Click="OpenSettings_OnClick">Open Settings</Button>
+
+        <TextBlock HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Name="ButtonViewer">Waiting for presses</TextBlock>
+        <Button HorizontalAlignment="Center" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Click="CloseProgram_OnClick">Close</Button>
+    </Grid>
+
+</Window>
