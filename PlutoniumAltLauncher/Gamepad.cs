@@ -12,26 +12,6 @@ public class Gamepad
     //Event sent to UI thread
     public event EventHandler<string>? GamepadButtonPressed;
     
-    private async Task<IntPtr> PollOpenGamepad()
-    {
-        while (true)
-        {
-            SDL.UpdateGamepads();
-            // Background work here
-            var gamepads = SDL.GetGamepads(out var count);
-            if (gamepads is null || gamepads.Length == 0)
-            {
-                Console.WriteLine("No gamepads found");
-                await Task.Delay(5000);
-                continue;
-            }
-            
-            var gamepad = SDL.OpenGamepad(gamepads[0]);
-            Console.WriteLine($"Gamepad {SDL.GetGamepadName(gamepad)} is now connected ");
-            return gamepad;
-        }
-    }
-    
     public void StartGamepadHandling()
     {
         Task.Run(async () =>
@@ -79,5 +59,26 @@ public class Gamepad
             }
 
         });
+    }
+
+    
+    private async Task<IntPtr> PollOpenGamepad()
+    {
+        while (true)
+        {
+            SDL.UpdateGamepads();
+            // Background work here
+            var gamepads = SDL.GetGamepads(out var count);
+            if (gamepads is null || gamepads.Length == 0)
+            {
+                Console.WriteLine("No gamepads found");
+                await Task.Delay(5000);
+                continue;
+            }
+            
+            var gamepad = SDL.OpenGamepad(gamepads[0]);
+            Console.WriteLine($"Gamepad {SDL.GetGamepadName(gamepad)} is now connected ");
+            return gamepad;
+        }
     }
 }

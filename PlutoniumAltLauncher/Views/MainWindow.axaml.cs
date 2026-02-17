@@ -35,7 +35,7 @@ public partial class MainWindow : Window
     private void LaunchGame_OnClick(object? sender, RoutedEventArgs e)
     {
         var btn = (Button)sender!;
-        var tag = btn.Name;
+        var name = btn.Name;
         
         var user = Environment.UserName;
         var plutoniumAppDataPath = $@"C:\Users\{user}\AppData\Local\Plutonium";
@@ -50,7 +50,7 @@ public partial class MainWindow : Window
             Log.Information("Created directory {PlutoniumAppDataPath}", plutoniumAppDataPath);
         }
         
-        switch (tag)
+        switch (name)
         {
             case "PlutoniumOnline":
             {
@@ -60,28 +60,28 @@ public partial class MainWindow : Window
             case "PlutoniumT4SPZM" or "PlutoniumT4MP":
             {
                 exe = bootstrapperExecutable;
-                var gameName = tag.EndsWith("MP") ? "t4mp" : "t4sp";
+                var gameName = name.EndsWith("MP") ? "t4mp" : "t4sp";
                 arguments = $"{gameName} {AppConfigManager.Current.T4FolderPath} +name {AppConfigManager.Current.IngameUsername} -lan";
                 break;
             }
             case "PlutoniumT5SPZM" or "PlutoniumT5MP":
             {
                 exe = bootstrapperExecutable;
-                var gameName = tag.EndsWith("MP") ? "t5mp" : "t5sp";
+                var gameName = name.EndsWith("MP") ? "t5mp" : "t5sp";
                 arguments = $"{gameName} {AppConfigManager.Current.T5FolderPath} +name {AppConfigManager.Current.IngameUsername} -lan";
                 break;
             }
             case "PlutoniumT6ZM" or "PlutoniumT6MP":
             {
                 exe = bootstrapperExecutable;
-                var gameName = tag.EndsWith("MP") ? "t6mp" : "t6zm";
+                var gameName = name.EndsWith("MP") ? "t6mp" : "t6zm";
                 arguments = $"{gameName} {AppConfigManager.Current.T6FolderPath} +name {AppConfigManager.Current.IngameUsername} -lan";
                 break;
             }
             case "PlutoniumIW5SP" or "PlutoniumIW5MP":
             {
                 exe = bootstrapperExecutable;
-                var gameName = tag.EndsWith("MP") ? "iw5mp" : "iw5sp";
+                var gameName = name.EndsWith("MP") ? "iw5mp" : "iw5sp";
                 arguments = $"{gameName} {AppConfigManager.Current.IW5FolderPath} +name {AppConfigManager.Current.IngameUsername} -lan";
                 break;
             }

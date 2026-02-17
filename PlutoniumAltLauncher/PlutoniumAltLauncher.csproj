@@ -12,11 +12,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Models\" />
-        <AvaloniaResource Include="Assets\**" />
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.3.8" />
         <PackageReference Include="Avalonia.Desktop" Version="11.3.8" />
         <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.8" />
@@ -27,17 +22,23 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+        <PackageReference Include="LibVLCSharp" Version="3.9.5" />
+        <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.23" />
         <PackageReference Include="MessageBox.Avalonia" Version="3.3.1.1" />
-        <PackageReference Include="SDL3-CS" Version="3.3.7" />
         <None Include="Native\SDL3.dll" CopyToOutputDirectory="Always" Link="SDL3.dll" /> <!-- Manually including SDL3.dll -->
+        <PackageReference Include="SDL3-CS" Version="3.3.7" />
         <PackageReference Include="Serilog" Version="4.3.0" />
         <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
         <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-    </ItemGroup>
 
-    <ItemGroup>
-      <Compile Update="Views\MainWindowGamepad.axaml.cs">
-        <DependentUpon>MainWindow.axaml</DependentUpon>
-      </Compile>
+        <Compile Update="Views\MainWindowGamepad.axaml.cs">
+            <DependentUpon>MainWindow.axaml</DependentUpon>
+        </Compile>
+        
+        <AvaloniaResource Include="Assets\avalonia-logo.ico" />
+        <AvaloniaResource Include="Assets\images\**" /> <!-- Images are included inside the executable (and available on the avalonia side) -->
+        <Content Include="Assets\music\**"> <!-- Music files are outside of avalonia framework resources, so we need to import them separately -->
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 </Project>

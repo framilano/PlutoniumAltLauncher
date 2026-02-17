@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Media;
 using Avalonia.Threading;
 using Serilog;
 
@@ -10,7 +8,6 @@ namespace PlutoniumAltLauncher.Views;
 
 public partial class MainWindow
 {
-    
     //Init method invoked in MainWindow.axaml.cs
     public void InitGamepadHandling()
     {
@@ -19,24 +16,16 @@ public partial class MainWindow
         gamepad.StartGamepadHandling();
         gamepad.GamepadButtonPressed += OnGamepadButtonPressed;
         
+        //New instance of background music, all handling is declared here
+        BackgroundMusic backgroundMusic = new BackgroundMusic();
+        backgroundMusic.StartBackgroundMusicHandling();
+        
         //When the window goes out of focus, tell the gamepad handler to stop polling for events
         //Activated and Deactivated are events fire by this Window
         Activated += (_, _) => gamepad.IsActive = true;
         Deactivated += (_, _) => gamepad.IsActive = false;
 
         AddHighlight(PlutoniumOnline);
-    }
-
-    private void AddHighlight(Button element)
-    {
-        element.BorderBrush = new SolidColorBrush(Colors.Blue);
-        element.BorderThickness = new Thickness(2);
-    }
-
-    private void RemoveHighlight(Button element)
-    {
-        element.BorderBrush = null;
-        element.BorderThickness = new Thickness(0);
     }
     
     private int[] CurrentElementSelected { get; set; } = [0, 0];
@@ -53,6 +42,45 @@ public partial class MainWindow
         ["0;4"] = "PlutoniumIW5SP",
         ["1;4"] = "PlutoniumIW5MP",
     };
+
+    private void OnPointerEntered(object? sender, RoutedEventArgs e)
+    {
+        var btn = (Button)sender!;
+        var name = btn.Name!;
+        
+        Button enteredButton = this.FindControl<Button>(name)!;
+        AddHighlight(enteredButton);
+
+        foreach (var element in ElementsDict)
+        {
+            if (element.Value == name)
+            {
+                CurrentElementSelected[0] = int.Parse(element.Key.Split(";")[0]);
+                CurrentElementSelected[1] = int.Parse(element.Key.Split(";")[1]);
+            }
+        }
+    }
+    
+    private void OnPointerExited(object? sender, RoutedEventArgs e)
+    {
+        var btn = (Button)sender!;
+        var name = btn.Name!;
+        
+        Button enteredButton = this.FindControl<Button>(name)!;
+        RemoveHighlight(enteredButton);
+    }
+
+
+    private void AddHighlight(Button element)
+    {
+        element.Opacity = 1;
+    }
+
+    private void RemoveHighlight(Button element)
+    {
+        element.Opacity = 0.3;
+
+    }
     
     private void OnGamepadButtonPressed(object? sender, string message)
     {
@@ -96,7 +124,7 @@ public partial class MainWindow
             
             Button buttonToHighlight = this.FindControl<Button>(ElementsDict[$"{CurrentElementSelected[0]};{CurrentElementSelected[1]}"])!;
             AddHighlight(buttonToHighlight);
-            ButtonViewer.Text = message;
+            //ButtonViewer.Text = message;
         });
     }
 }
