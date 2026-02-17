@@ -1,7 +1,7 @@
 # PlutoniumAltLauncher 
 #### *Plutonium Alternative Launcher*
 
-A Plutonium launcher that allows you to play offline, mainly developed with Steam Deck in mind.
+A [Plutonium](https://plutonium.pw/) launcher that allows you to play offline, mainly developed with Steam Deck in mind and powered by [Avalonia](https://avaloniaui.net/).
 
 ## Todo
 - [X] Add Controller support
@@ -11,3 +11,4 @@ A Plutonium launcher that allows you to play offline, mainly developed with Stea
 - [ ] Stop music when launching Plutonium
 - [ ] Close Launcher automatically when launching Plutonium
 - [ ] Change music (and loop it) when changing game in main menu
+- [ ] Better UI in settings, controller navigation?
