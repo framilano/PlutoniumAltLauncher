@@ -73,13 +73,20 @@ public partial class MainWindow
 
     private void AddHighlight(Button element)
     {
+        
+        foreach (var keyPair in ElementsDict)
+        {   
+            //Remove highlight from every element when adding a new highlight (could be useful is a cursor is in window and we're
+            //moving with a gamepad
+            RemoveHighlight(this.FindControl<Button>(ElementsDict[keyPair.Key])!);
+        }
+        
         element.Opacity = 1;
     }
 
     private void RemoveHighlight(Button element)
     {
         element.Opacity = 0.3;
-
     }
     
     private void OnGamepadButtonPressed(object? sender, string message)

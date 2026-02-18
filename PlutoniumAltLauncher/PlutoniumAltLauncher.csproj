@@ -25,7 +25,6 @@
         <PackageReference Include="LibVLCSharp" Version="3.9.5" />
         <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.23" />
         <PackageReference Include="MessageBox.Avalonia" Version="3.3.1.1" />
-        <None Include="Native\SDL3.dll" CopyToOutputDirectory="Always" Link="SDL3.dll" /> <!-- Manually including SDL3.dll -->
         <PackageReference Include="SDL3-CS" Version="3.3.7" />
         <PackageReference Include="Serilog" Version="4.3.0" />
         <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
@@ -35,10 +34,13 @@
             <DependentUpon>MainWindow.axaml</DependentUpon>
         </Compile>
         
+        
         <AvaloniaResource Include="Assets\avalonia-logo.ico" />
         <AvaloniaResource Include="Assets\images\**" /> <!-- Images are included inside the executable (and available on the avalonia side) -->
         <Content Include="Assets\music\**"> <!-- Music files are outside of avalonia framework resources, so we need to import them separately -->
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
+
+        <None Include="Native\SDL3.dll" CopyToOutputDirectory="Always" Link="SDL3.dll" /> <!-- Manually including SDL3.dll -->
     </ItemGroup>
 </Project>

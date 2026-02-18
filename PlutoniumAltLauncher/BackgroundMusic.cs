@@ -14,10 +14,10 @@ public class BackgroundMusic
         {
             Core.Initialize(); // loads native VLC
 
-            using var libVLC = new LibVLC();
+            using var libVlc = new LibVLC();
             
             var path = Path.Combine(AppContext.BaseDirectory, "Assets/music", "adrenaline.mp3");
-            using var media = new Media(libVLC, path, FromType.FromPath);
+            using var media = new Media(libVlc, path);
             using var player = new MediaPlayer(media);
 
             player.Play();
