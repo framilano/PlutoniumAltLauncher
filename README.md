@@ -8,7 +8,7 @@ A [Plutonium](https://plutonium.pw/) launcher that allows you to play offline, m
 
 ## Building
 ```
-dotnet publish -c Release -r win-x64 --self-contained true -p:PublishTrimmed=true -p:TrimMode=partial
+dotnet publish -c Release -r win-x64
 robocopy PlutoniumAltLauncher/Native/libvlc PlutoniumAltLauncher/bin/Release/net9.0/win-x64/publish/libvlc /MIR
 ```
 ## Todo
@@ -19,6 +19,6 @@ robocopy PlutoniumAltLauncher/Native/libvlc PlutoniumAltLauncher/bin/Release/net
 - [X] Stop music when launching Plutonium
 - [X] Option to close Launcher automatically when launching Plutonium
 - [X] Change music (and loop it) when changing game in main menu
-- [ ] Check if player started Plutonium at least once
+- [X] Check if player started Plutonium at least once
 - [ ] Better UI in settings, controller navigation?
 - [ ] Reduce RAM usage
