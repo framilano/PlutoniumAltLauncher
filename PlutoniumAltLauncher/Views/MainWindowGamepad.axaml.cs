@@ -9,10 +9,10 @@ namespace PlutoniumAltLauncher.Views;
 public partial class MainWindow
 {
     //Init method invoked in MainWindow.axaml.cs
-    public void InitGamepadHandling()
+    private void InitGamepadHandling()
     {
         //New instance of gamepad, all handling is declared here
-        Gamepad gamepad = new Gamepad();
+        var gamepad = new Gamepad();
         gamepad.StartGamepadHandling();
         gamepad.GamepadButtonPressed += OnGamepadButtonPressed;
         
@@ -21,48 +21,46 @@ public partial class MainWindow
         Activated += (_, _) => gamepad.IsActive = true;
         Deactivated += (_, _) => gamepad.IsActive = false;
 
-        AddHighlight(PlutoniumOnline);
+        AddHighlight(OnlineBtn);
     }
     
     private int[] CurrentElementSelected { get; set; } = [0, 0];
-    private Dictionary<string, string> ElementsDict = new Dictionary<string, string>
+    private readonly Dictionary<string, string> _elementsDict = new Dictionary<string, string>
     {
-        ["0;0"] = "PlutoniumOnline",
-        ["1;0"] = "PlutoniumOnline",
-        ["0;1"] = "PlutoniumT4SPZM",
-        ["1;1"] = "PlutoniumT4MP",
-        ["0;2"] = "PlutoniumT5SPZM",
-        ["1;2"] = "PlutoniumT5MP",
-        ["0;3"] = "PlutoniumT6ZM",
-        ["1;3"] = "PlutoniumT6MP",
-        ["0;4"] = "PlutoniumIW5SP",
-        ["1;4"] = "PlutoniumIW5MP",
+        ["0;0"] = "OnlineBtn",
+        ["1;0"] = "OnlineBtn",
+        ["0;1"] = "T4SpBtn",
+        ["1;1"] = "T4MpBtn",
+        ["0;2"] = "T5SpBtn",
+        ["1;2"] = "T5MpBtn",
+        ["0;3"] = "T6ZmBtn",
+        ["1;3"] = "T6MpBtn",
+        ["0;4"] = "Iw5SpBtn",
+        ["1;4"] = "Iw5MpBtn",
     };
 
-    private void OnPointerEntered(object? sender, RoutedEventArgs e)
+    private void OnPointerEntered(object? sender, RoutedEventArgs _)
     {
         var btn = (Button)sender!;
         var name = btn.Name!;
         
-        Button enteredButton = this.FindControl<Button>(name)!;
+        var enteredButton = this.FindControl<Button>(name)!;
         AddHighlight(enteredButton);
 
-        foreach (var element in ElementsDict)
+        foreach (var element in _elementsDict)
         {
-            if (element.Value == name)
-            {
-                CurrentElementSelected[0] = int.Parse(element.Key.Split(";")[0]);
-                CurrentElementSelected[1] = int.Parse(element.Key.Split(";")[1]);
-            }
+            if (element.Value != name) continue;
+            CurrentElementSelected[0] = int.Parse(element.Key.Split(";")[0]);
+            CurrentElementSelected[1] = int.Parse(element.Key.Split(";")[1]);
         }
     }
     
-    private void OnPointerExited(object? sender, RoutedEventArgs e)
+    private void OnPointerExited(object? sender, RoutedEventArgs _)
     {
         var btn = (Button)sender!;
         var name = btn.Name!;
         
-        Button enteredButton = this.FindControl<Button>(name)!;
+        var enteredButton = this.FindControl<Button>(name)!;
         RemoveHighlight(enteredButton);
     }
 
@@ -70,24 +68,27 @@ public partial class MainWindow
     private void AddHighlight(Button element)
     {
         
-        foreach (var keyPair in ElementsDict)
+        //Telling the backgroundmusic the change song
+        ChangeMusic(element.Name!.ToLower().Replace("btn", ""));
+        
+        foreach (var keyPair in _elementsDict)
         {   
             //Remove highlight from every element when adding a new highlight (could be useful is a cursor is in window and we're
             //moving with a gamepad
-            RemoveHighlight(this.FindControl<Button>(ElementsDict[keyPair.Key])!);
+            RemoveHighlight(this.FindControl<Button>(_elementsDict[keyPair.Key])!);
         }
         
         element.Opacity = 1;
     }
 
-    private void RemoveHighlight(Button element)
+    private static void RemoveHighlight(Button element)
     {
         element.Opacity = 0.3;
     }
     
     private void OnGamepadButtonPressed(object? sender, string message)
     {
-        int number = int.Parse(message);
+        var number = int.Parse(message);
         int[] newElementSelected = number switch
         {
             0 => [CurrentElementSelected[0], CurrentElementSelected[1] - 1],
@@ -102,7 +103,7 @@ public partial class MainWindow
             Dispatcher.UIThread.Post(() =>
             {
                 //Emulating click event
-                Button currentHighlightedButton = this.FindControl<Button>(ElementsDict[$"{CurrentElementSelected[0]};{CurrentElementSelected[1]}"])!;
+                var currentHighlightedButton = this.FindControl<Button>(_elementsDict[$"{CurrentElementSelected[0]};{CurrentElementSelected[1]}"])!;
                 currentHighlightedButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             });
             Log.Information("Clicked on button!");
@@ -120,12 +121,12 @@ public partial class MainWindow
 
         Dispatcher.UIThread.Post(() =>
         {
-            Button currentHighlightedButton = this.FindControl<Button>(ElementsDict[$"{CurrentElementSelected[0]};{CurrentElementSelected[1]}"])!;
+            var currentHighlightedButton = this.FindControl<Button>(_elementsDict[$"{CurrentElementSelected[0]};{CurrentElementSelected[1]}"])!;
             RemoveHighlight(currentHighlightedButton);
             
             CurrentElementSelected = newElementSelected;
             
-            Button buttonToHighlight = this.FindControl<Button>(ElementsDict[$"{CurrentElementSelected[0]};{CurrentElementSelected[1]}"])!;
+            var buttonToHighlight = this.FindControl<Button>(_elementsDict[$"{CurrentElementSelected[0]};{CurrentElementSelected[1]}"])!;
             AddHighlight(buttonToHighlight);
             //ButtonViewer.Text = message;
         });

@@ -5,6 +5,7 @@
         mc:Ignorable="d"
         x:Class="PlutoniumAltLauncher.Views.MainSettings"
         SizeToContent="WidthAndHeight"
+        FontSize="30"
         Title="MainSettings">
     
     <Grid 

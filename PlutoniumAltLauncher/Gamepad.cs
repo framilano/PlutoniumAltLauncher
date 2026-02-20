@@ -25,11 +25,7 @@ public class Gamepad
             
             while (true)
             {
-                if (!IsActive)
-                {
-                    await Task.Delay(1000);
-                    continue;
-                }
+                while (!IsActive)  await Task.Delay(1000);  //Window isn't active, stop polling
                 
                 SDL.UpdateGamepads();
                 if (!SDL.GamepadConnected(gamepad))
@@ -50,14 +46,13 @@ public class Gamepad
                     if (!prevBtns[i] && curBtns[i])
                     {
                         GamepadButtonPressed?.Invoke(null, i.ToString());
-                        Console.WriteLine("Pressed " + i);
+                        //Console.WriteLine("Pressed " + i);
                     }
                     prevBtns[i] = curBtns[i];
                 }
                 
                 await Task.Delay(10);
             }
-
         });
     }
 
@@ -71,13 +66,13 @@ public class Gamepad
             var gamepads = SDL.GetGamepads(out var count);
             if (gamepads is null || gamepads.Length == 0)
             {
-                Console.WriteLine("No gamepads found");
+                //Console.WriteLine("No gamepads found");
                 await Task.Delay(5000);
                 continue;
             }
             
             var gamepad = SDL.OpenGamepad(gamepads[0]);
-            Console.WriteLine($"Gamepad {SDL.GetGamepadName(gamepad)} is now connected ");
+            //Console.WriteLine($"Gamepad {SDL.GetGamepadName(gamepad)} is now connected ");
             return gamepad;
         }
     }

@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PlutoniumAltLauncher.Views.ErrorWindow"
+        Title="Placeholder"
+        SizeToContent="WidthAndHeight"
+        FontSize="20">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Padding="30" HorizontalAlignment="Center" VerticalAlignment="Center" Name="ErrorMessage">Placeholder</TextBlock>
+        
+        <Button Click="Quit" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">Ok</Button>
+    </Grid>
+</Window>

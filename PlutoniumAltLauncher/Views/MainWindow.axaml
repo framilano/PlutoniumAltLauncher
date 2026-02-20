@@ -35,59 +35,59 @@
         </Grid.ColumnDefinitions>
 
         
-        <Button HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Name="PlutoniumOnline"
+        <Button HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Name="OnlineBtn"
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">
             <Image Source="avares://PlutoniumAltLauncher/Assets/images/classic.png" Stretch="UniformToFill" />
         </Button>
 
-        <Button HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Name="PlutoniumT4SPZM" Opacity="0.3"
+        <Button HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Name="T4SpBtn" Opacity="0.3"
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">
             <Image Source="avares://PlutoniumAltLauncher/Assets/images/t4sp.png" Stretch="UniformToFill" />
         </Button>
-        <Button HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Name="PlutoniumT4MP" Opacity="0.3"
+        <Button HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Name="T4MpBtn" Opacity="0.3"
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">
             <Image Source="avares://PlutoniumAltLauncher/Assets/images/t4mp.png" Stretch="UniformToFill" />
         </Button>
         
-        <Button HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" Name="PlutoniumT5SPZM" Opacity="0.3"
+        <Button HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" Name="T5SpBtn" Opacity="0.3"
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">
             <Image Source="avares://PlutoniumAltLauncher/Assets/images/t5sp.png" Stretch="UniformToFill" />
         </Button>
-        <Button HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Name="PlutoniumT5MP" Opacity="0.3"
+        <Button HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1" Name="T5MpBtn" Opacity="0.3"
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">
             <Image Source="avares://PlutoniumAltLauncher/Assets/images/t5mp.png" Stretch="UniformToFill" />
         </Button>
         
-        <Button HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" Name="PlutoniumT6ZM" Opacity="0.3"
+        <Button HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" Name="T6ZmBtn" Opacity="0.3"
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">
             <Image Source="avares://PlutoniumAltLauncher/Assets/images/t6zm.png" Stretch="UniformToFill" />
         </Button>
-        <Button HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1" Name="PlutoniumT6MP" Opacity="0.3"
+        <Button HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1" Name="T6MpBtn" Opacity="0.3"
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">
             <Image Source="avares://PlutoniumAltLauncher/Assets/images/t6mp.png" Stretch="UniformToFill" />
         </Button>
         
-        <Button HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" Name="PlutoniumIW5SP" Opacity="0.3"
+        <Button HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" Name="Iw5SpBtn" Opacity="0.3"
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">
             <Image Source="avares://PlutoniumAltLauncher/Assets/images/iw5sp.png" Stretch="UniformToFill" />
         </Button>
-        <Button HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" Name="PlutoniumIW5MP" Opacity="0.3"
+        <Button HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" Name="Iw5MpBtn" Opacity="0.3"
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">

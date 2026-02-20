@@ -18,7 +18,7 @@ public static class AppConfigManager
     
     public class AppConfig
     {
-        public string PlutoniumPath { get; set; } = "";
+        public string PlutoniumExecutablePath { get; set; } = "";
         public string IngameUsername { get; set; } = "offlineuser";
         public string T4FolderPath { get; set; } = "";
         public string T5FolderPath { get; set; } = "";

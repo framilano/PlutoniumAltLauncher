@@ -12,13 +12,15 @@ public partial class MainSettings : Window
     {
         InitializeComponent();
         
-        PlutoniumPath.Text =  AppConfigManager.Current.PlutoniumPath;
+        PlutoniumPath.Text =  AppConfigManager.Current.PlutoniumExecutablePath;
         IngameUsername.Text = AppConfigManager.Current.IngameUsername;
         T4FolderPath.Text = AppConfigManager.Current.T4FolderPath;
         T5FolderPath.Text = AppConfigManager.Current.T5FolderPath;
         T6FolderPath.Text = AppConfigManager.Current.T6FolderPath;
         IW5FolderPath.Text = AppConfigManager.Current.IW5FolderPath;
         CloseAtLaunch.IsChecked = AppConfigManager.Current.CloseAtLaunch;
+        
+        WindowStartupLocation = WindowStartupLocation.CenterScreen;
     }
     
     private async Task<string> SelectFile()
@@ -66,7 +68,7 @@ public partial class MainSettings : Window
     {
         var plutoniumPath = await SelectFile();
         PlutoniumPath.Text = plutoniumPath;
-        AppConfigManager.Current.PlutoniumPath = plutoniumPath;
+        AppConfigManager.Current.PlutoniumExecutablePath = plutoniumPath;
     }
     
     private async void SelectGameFolder_OnClick(object? sender, RoutedEventArgs e)
@@ -111,7 +113,7 @@ public partial class MainSettings : Window
 
     private void SaveConfig_OnClick(object? sender, RoutedEventArgs e)
     {
-        AppConfigManager.Current.PlutoniumPath = PlutoniumPath.Text!;
+        AppConfigManager.Current.PlutoniumExecutablePath = PlutoniumPath.Text!;
         AppConfigManager.Current.IngameUsername = IngameUsername.Text!;
         AppConfigManager.Current.T4FolderPath = T4FolderPath.Text!;
         AppConfigManager.Current.T5FolderPath = T5FolderPath.Text!;

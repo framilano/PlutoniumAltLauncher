@@ -10,6 +10,18 @@ public class BackgroundMusic
     
     //Defines if music should be playing or not
     public bool IsActive { get; set; } = true;
+
+    private string SongToPlay { get; set; } = "damned.mp3";
+
+    private MediaPlayer? _player;
+    
+    public void ChangeSong(string songName)
+    {
+        SongToPlay = songName;
+        IsActive = false;
+        _player?.Stop();
+        IsActive = true;
+    }
     
     public void StartBackgroundMusicHandling()
     {
@@ -19,28 +31,28 @@ public class BackgroundMusic
             
             while (true)
             {
-                while (!IsActive) await Task.Delay(100);
+                while (!IsActive) await Task.Delay(100); //Window isn't active, stop playing
                 await PlayMusic();
             }
-
         });
     }
 
     private async Task PlayMusic()
     {
         using var libVlc = new LibVLC();
-        var path = Path.Combine(AppContext.BaseDirectory, "Assets/music", "adrenaline.mp3");
+        var path = Path.Combine(AppContext.BaseDirectory, "Assets/music", SongToPlay);
         using var media = new Media(libVlc, path);
-        using var player = new MediaPlayer(media);
+        _player = new MediaPlayer(media);
 
-        player.Play();
-        player.Volume = 35;
+        _player.Play();
+        _player.Volume = 35;
             
         //If this is too fast, player.IsPlaying would be false...
         await Task.Delay(500);
 
-        Console.WriteLine("Playing...");
+        //Console.WriteLine("Playing...");
 
-        while (IsActive && player.IsPlaying) await Task.Delay(100);
+        while (IsActive && _player.IsPlaying) await Task.Delay(100);
+        _player.Stop();
     }
 }

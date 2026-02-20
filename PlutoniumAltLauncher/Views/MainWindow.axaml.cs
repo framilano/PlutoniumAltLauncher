@@ -3,8 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using MsBox.Avalonia;
-using MsBox.Avalonia.Enums;
 using Serilog;
 
 namespace PlutoniumAltLauncher.Views;
@@ -15,12 +13,13 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         AppConfigManager.Load();
+
+        //Init MainWindowBackgroundMusic
+        InitBackgroundMusicHandling();
         
         //Init MainWindowGamepad
         InitGamepadHandling();
         
-        //Init MainWindowBackgroundMusic
-        InitBackgroundMusicHandling();
     }
     
     private void OpenSettings_OnClick(object? sender, RoutedEventArgs e)
@@ -29,22 +28,23 @@ public partial class MainWindow : Window
         win.ShowDialog(this);
     }
 
-    private async void ShowMessage(string title, string message)
+    private void ShowMessage(string title, string message)
     {
-        var box = MessageBoxManager.GetMessageBoxStandard(title,message, ButtonEnum.Ok);
-        var result = await box.ShowAsync(); // Use await
+        var win = new ErrorWindow(title, message);
+        win.ShowDialog(this);
     }
 
     private void LaunchGame_OnClick(object? sender, RoutedEventArgs e)
     {
         var btn = (Button)sender!;
-        var name = btn.Name;
+        var gameName = btn.Name!.ToLower().Replace("btn", "");
         
         var user = Environment.UserName;
         var plutoniumAppDataPath = $@"C:\Users\{user}\AppData\Local\Plutonium";
         var bootstrapperExecutable = $@"{plutoniumAppDataPath}\bin\plutonium-bootstrapper-win32.exe";
         var arguments = "";
         var exe = "";
+        var gamePath = "";
         
         //Creating AppData dir if not present
         if (!Directory.Exists(plutoniumAppDataPath))
@@ -52,53 +52,21 @@ public partial class MainWindow : Window
             Directory.CreateDirectory(plutoniumAppDataPath);
             Log.Information("Created directory {PlutoniumAppDataPath}", plutoniumAppDataPath);
         }
-        
-        switch (name)
-        {
-            case "PlutoniumOnline":
-            {
-                exe = AppConfigManager.Current.PlutoniumPath;
-                break;
-            }
-            case "PlutoniumT4SPZM" or "PlutoniumT4MP":
-            {
-                exe = bootstrapperExecutable;
-                var gameName = name.EndsWith("MP") ? "t4mp" : "t4sp";
-                arguments = $"{gameName} {AppConfigManager.Current.T4FolderPath} +name {AppConfigManager.Current.IngameUsername} -lan";
-                break;
-            }
-            case "PlutoniumT5SPZM" or "PlutoniumT5MP":
-            {
-                exe = bootstrapperExecutable;
-                var gameName = name.EndsWith("MP") ? "t5mp" : "t5sp";
-                arguments = $"{gameName} {AppConfigManager.Current.T5FolderPath} +name {AppConfigManager.Current.IngameUsername} -lan";
-                break;
-            }
-            case "PlutoniumT6ZM" or "PlutoniumT6MP":
-            {
-                exe = bootstrapperExecutable;
-                var gameName = name.EndsWith("MP") ? "t6mp" : "t6zm";
-                arguments = $"{gameName} {AppConfigManager.Current.T6FolderPath} +name {AppConfigManager.Current.IngameUsername} -lan";
-                break;
-            }
-            case "PlutoniumIW5SP" or "PlutoniumIW5MP":
-            {
-                exe = bootstrapperExecutable;
-                var gameName = name.EndsWith("MP") ? "iw5mp" : "iw5sp";
-                arguments = $"{gameName} {AppConfigManager.Current.IW5FolderPath} +name {AppConfigManager.Current.IngameUsername} -lan";
-                break;
-            }
-        }
 
+        exe = bootstrapperExecutable;
+        if (gameName == "online") exe = AppConfigManager.Current.PlutoniumExecutablePath;
+        else if (gameName.Contains("t4")) gamePath = AppConfigManager.Current.T4FolderPath;
+        else if (gameName.Contains("t5")) gamePath = AppConfigManager.Current.T5FolderPath;
+        else if (gameName.Contains("t6")) gamePath = AppConfigManager.Current.T6FolderPath;
+        else arguments = gamePath = AppConfigManager.Current.IW5FolderPath;
+
+        if (!string.IsNullOrEmpty(gamePath)) arguments = $"{gameName} {gamePath} +name {AppConfigManager.Current.IngameUsername} -lan"; 
+        
         Log.Information("Executable {Executable}", exe);
         Log.Information("Arguments {Arguments}", arguments);
         Log.Information("WorkingDir {PlutoniumAppDataPath}", plutoniumAppDataPath);
-        
-        if (string.IsNullOrEmpty(exe))
-        {
-            ShowMessage("Invalid executable selected", "Check your executable paths in settings");
-            return;
-        }
+
+        if (!ValidateButtonInput(gameName, gamePath, exe)) return;
 
         try
         {
@@ -114,5 +82,29 @@ public partial class MainWindow : Window
         Log.Information("Game launched successfully");
         if (AppConfigManager.Current.CloseAtLaunch) Close();
         
+    }
+
+    private bool ValidateButtonInput(string gameName, string gamePath, string exe)
+    {
+        if (gameName != "online" && string.IsNullOrEmpty(gamePath))
+        {
+            ShowMessage("⚠️ Invalid gamepath selected", "Check your game paths in settings");
+            return false;
+        }
+        
+        if (string.IsNullOrEmpty(exe))
+        {
+            ShowMessage("⚠️ Invalid executable selected", "Check your plutonium.exe path in settings");
+            return false;
+        }
+
+        if (!File.Exists(exe))
+        {
+            ShowMessage("⚠️ Plutonium installation not found", "I can't find your Plutonium installation\nDid you boot the official launcher at least once?");
+            return false;
+        }
+        
+        Log.Debug("Validation completed");
+        return true;
     }
 }
