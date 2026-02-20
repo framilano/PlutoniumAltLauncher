@@ -18,6 +18,9 @@ public partial class MainWindow : Window
         
         //Init MainWindowGamepad
         InitGamepadHandling();
+        
+        //Init MainWindowBackgroundMusic
+        InitBackgroundMusicHandling();
     }
     
     private void OpenSettings_OnClick(object? sender, RoutedEventArgs e)
@@ -106,15 +109,10 @@ public partial class MainWindow : Window
                 WorkingDirectory = plutoniumAppDataPath
             });
         }
-        catch (Exception ex)
-        {
-            Log.Error(ex, "Process crashed :\\");
-        }
-    }
-
-    private void CloseProgram_OnClick(object? sender, RoutedEventArgs e)
-    {
-        Log.Information("Application closing");
-        Close();
+        catch (Exception ex) { Log.Error(ex, "Process crashed :\\"); }
+        
+        Log.Information("Game launched successfully");
+        if (AppConfigManager.Current.CloseAtLaunch) Close();
+        
     }
 }

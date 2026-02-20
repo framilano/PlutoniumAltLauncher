@@ -35,7 +35,7 @@
         </Grid.ColumnDefinitions>
 
         
-        <Button HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Name="PlutoniumOnline" 
+        <Button HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Name="PlutoniumOnline"
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">
@@ -85,7 +85,7 @@
                 Click="LaunchGame_OnClick"
                 PointerEntered="OnPointerEntered"
                 PointerExited="OnPointerExited">
-            <Image Source="avares://PlutoniumAltLauncher/Assets/images/iw5mp.png" Stretch="UniformToFill" />
+            <Image Source="avares://PlutoniumAltLauncher/Assets/images/iw5sp.png" Stretch="UniformToFill" />
         </Button>
         <Button HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1" Name="PlutoniumIW5MP" Opacity="0.3"
                 Click="LaunchGame_OnClick"

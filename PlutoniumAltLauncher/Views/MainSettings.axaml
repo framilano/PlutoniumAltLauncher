@@ -2,13 +2,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d"
         x:Class="PlutoniumAltLauncher.Views.MainSettings"
+        SizeToContent="WidthAndHeight"
         Title="MainSettings">
     
     <Grid 
         ColumnDefinitions="Auto, Auto, Auto"
-        RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+        RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
         HorizontalAlignment="Center"
         >
         <TextBlock Text="Choose your in-game username (offline only)" Grid.Row="0" Grid.Column="0"></TextBlock>
@@ -17,7 +18,6 @@
         <TextBlock Text="Select 'plutonium.exe' path" Grid.Row="1" Grid.Column="0"></TextBlock>
         <TextBox Name="PlutoniumPath" Text="" Grid.Row="1" Grid.Column="1"></TextBox>
         <Button Grid.Row="1" Grid.Column="2" Click="SelectFilePlutoniumPath_OnClick" Content="..."/>
-        
         
         <TextBlock Text="Select World at War game folder" Grid.Row="2" Grid.Column="0"></TextBlock>
         <TextBox Name="T4FolderPath" Text="" Grid.Row="2" Grid.Column="1"></TextBox>
@@ -35,7 +35,10 @@
         <TextBox Name="IW5FolderPath" Text="" Grid.Row="5" Grid.Column="1"></TextBox>
         <Button Grid.Row="5" Grid.Column="2" Tag="IW5FolderButton" Click="SelectGameFolder_OnClick" Content="..."/>
         
-        <Button Name="SaveButton" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Click="SaveConfig_OnClick" HorizontalAlignment="Center">Save</Button>
+        <Label  Grid.Row="6" Grid.Column="0">Close launcher after booting a game</Label>
+        <CheckBox Name="CloseAtLaunch" IsCheckedChanged="CloseLauncher_OnCheck" Grid.Row="6" Grid.Column="1"/>
+        
+        <Button Name="SaveButton" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Click="SaveConfig_OnClick" HorizontalAlignment="Center">Save</Button>
     </Grid>
     
 </Window>

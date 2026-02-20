@@ -16,10 +16,6 @@ public partial class MainWindow
         gamepad.StartGamepadHandling();
         gamepad.GamepadButtonPressed += OnGamepadButtonPressed;
         
-        //New instance of background music, all handling is declared here
-        BackgroundMusic backgroundMusic = new BackgroundMusic();
-        backgroundMusic.StartBackgroundMusicHandling();
-        
         //When the window goes out of focus, tell the gamepad handler to stop polling for events
         //Activated and Deactivated are events fire by this Window
         Activated += (_, _) => gamepad.IsActive = true;

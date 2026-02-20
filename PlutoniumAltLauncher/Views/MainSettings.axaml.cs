@@ -18,7 +18,7 @@ public partial class MainSettings : Window
         T5FolderPath.Text = AppConfigManager.Current.T5FolderPath;
         T6FolderPath.Text = AppConfigManager.Current.T6FolderPath;
         IW5FolderPath.Text = AppConfigManager.Current.IW5FolderPath;
-        
+        CloseAtLaunch.IsChecked = AppConfigManager.Current.CloseAtLaunch;
     }
     
     private async Task<string> SelectFile()
@@ -102,6 +102,12 @@ public partial class MainSettings : Window
             }
         }
     }
+    
+    private async void CloseLauncher_OnCheck(object? sender, RoutedEventArgs e)
+    {
+        var checkBox = (CheckBox)sender!;
+        AppConfigManager.Current.CloseAtLaunch = checkBox.IsChecked!.Value;
+    }
 
     private void SaveConfig_OnClick(object? sender, RoutedEventArgs e)
     {
@@ -111,6 +117,7 @@ public partial class MainSettings : Window
         AppConfigManager.Current.T5FolderPath = T5FolderPath.Text!;
         AppConfigManager.Current.T6FolderPath = T6FolderPath.Text!;
         AppConfigManager.Current.IW5FolderPath = IW5FolderPath.Text!;
+        AppConfigManager.Current.CloseAtLaunch = CloseAtLaunch.IsChecked!.Value;
         AppConfigManager.Save();
         Close(); //Closes window
     }

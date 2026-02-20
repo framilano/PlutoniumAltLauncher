@@ -11,9 +11,9 @@ robocopy PlutoniumAltLauncher/Native/libvlc PlutoniumAltLauncher/bin/Release/net
 ## Todo
 - [X] Add Controller support
 - [X] Play background music
-- [ ] Set IW5SP image
-- [ ] Replace images with higher resolution ones? Meh
-- [ ] Stop music when launching Plutonium
-- [ ] Close Launcher automatically when launching Plutonium
+- [X] Set IW5SP image
+- [X] Replace images with higher resolution ones? Meh
+- [X] Stop music when launching Plutonium
+- [X] Option to close Launcher automatically when launching Plutonium
 - [ ] Change music (and loop it) when changing game in main menu
 - [ ] Better UI in settings, controller navigation?

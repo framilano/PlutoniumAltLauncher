@@ -24,6 +24,7 @@ public static class AppConfigManager
         public string T5FolderPath { get; set; } = "";
         public string T6FolderPath { get; set; } = "";
         public string IW5FolderPath { get; set; } = "";
+        public bool   CloseAtLaunch { get; set; }
         
     }
     
