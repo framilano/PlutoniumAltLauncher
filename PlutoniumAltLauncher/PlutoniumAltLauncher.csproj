@@ -28,7 +28,7 @@
         <PackageReference Include="Serilog" Version="4.3.0" />
         <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
         <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-        <AvaloniaResource Include="Assets\avalonia-logo.ico" />
+        <AvaloniaResource Include="Assets\icon.png" />
         <AvaloniaResource Include="Assets\images\**" /> <!-- Images are included inside the executable (and available on the avalonia side) -->
         <Content Include="Assets\**"> <!-- Music files are outside of avalonia framework resources, so we need to import them separately -->
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="800"
         x:Class="PlutoniumAltLauncher.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/icon.png"
         KeyDown="OnKeyDown"
         Title="PlutoniumAltLauncher">
 
