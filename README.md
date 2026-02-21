@@ -41,8 +41,9 @@ You can change this folder structure editing the `config.json` file.
 7. Start the program, you need to first boot the classic plutonium launcher (so it can download required files inside the proton prefix). Close everything and reboot the launcher, you're done!
 
 ## Extra
-You need to install through `Protontricks` the `xact` audio library to have all sound fx on BO1 and WAW
-You can edit config.json from the program itself when clicking/touching on the settings icon on the top right of the screen. You'll probably need a mouse or trackpads for better navigation in settings.
+- You need to install through `Protontricks` the `xact` audio library to have all sound fx on BO1 and WAW
+- You can edit config.json from the program itself when clicking/touching on the settings icon on the top right of the screen. You'll probably need a mouse or trackpads for better navigation in settings.
+- It's my first dotnet project, have mercy
 
 ## Configuration
 
