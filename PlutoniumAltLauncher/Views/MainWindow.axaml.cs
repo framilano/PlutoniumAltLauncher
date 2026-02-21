@@ -2,8 +2,8 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Threading;
 using Serilog;
 
 namespace PlutoniumAltLauncher.Views;
@@ -18,22 +18,22 @@ public partial class MainWindow : Window
         //Init MainWindowBackgroundMusic
         InitBackgroundMusicHandling();
         
-        //Init MainWindowGamepad
+        //Init MainWindowInputHandler Gamepad handling
         InitGamepadHandling();
         
-        Opened += (_, _) => Dispatcher.UIThread.Post(InvalidateVisual, DispatcherPriority.Render);
+        //Disabling TAB and keyboard navigation on MainWindow
+        //The logic with keys is custom, we don't this stuff
+        KeyboardNavigation.SetTabNavigation(this, KeyboardNavigationMode.None); 
+        
+        SystemDecorations = SystemDecorations.None;
+        WindowState = WindowState.FullScreen;
+        WindowStartupLocation = WindowStartupLocation.CenterScreen;
     }
     
     private void OpenSettings_OnClick(object? sender, RoutedEventArgs e)
     {
         var win = new MainSettings();
-        win.ShowDialog(this);
-    }
-
-    private void ShowMessage(string title, string message)
-    {
-        var win = new ErrorWindow(title, message);
-        win.ShowDialog(this);
+        win.Show(this);
     }
 
     private void LaunchGame_OnClick(object? sender, RoutedEventArgs e)
@@ -68,7 +68,11 @@ public partial class MainWindow : Window
         Log.Information("Arguments {Arguments}", arguments);
         Log.Information("WorkingDir {PlutoniumAppDataPath}", plutoniumAppDataPath);
 
-        if (!ValidateButtonInput(gameName, gamePath, exe)) return;
+        if (!ValidateButtonInput(gameName, gamePath, exe))
+        {
+            
+            return;
+        }
 
         try
         {
@@ -82,31 +86,44 @@ public partial class MainWindow : Window
         catch (Exception ex) { Log.Error(ex, "Process crashed :\\"); }
         
         Log.Information("Game launched successfully");
-        if (AppConfigManager.Current.CloseAtLaunch) Close();
         
+
+        if (AppConfigManager.Current.CloseAtLaunch)
+        {
+            Close();
+            return;
+        }
+        
+        ShowMessage("Wait please", "Launching...", 10);
     }
 
     private bool ValidateButtonInput(string gameName, string gamePath, string exe)
     {
         if (gameName != "online" && string.IsNullOrEmpty(gamePath))
         {
-            ShowMessage("⚠️ Invalid gamepath selected", "Check your game paths in settings");
+            ShowMessage("⚠️ Invalid gamepath selected", "⚠️\nCheck your game paths in settings", 0);
             return false;
         }
         
         if (string.IsNullOrEmpty(exe))
         {
-            ShowMessage("⚠️ Invalid executable selected", "Check your plutonium.exe path in settings");
+            ShowMessage("⚠️ Invalid executable selected", "️⚠️\nCheck your plutonium.exe path in settings", 0);
             return false;
         }
 
         if (!File.Exists(exe))
         {
-            ShowMessage("⚠️ Plutonium installation not found", "I can't find your Plutonium installation\nDid you boot the official launcher at least once?");
+            ShowMessage("⚠️ Plutonium installation not found", "️⚠️\nI can't find your Plutonium installation\nDid you boot the official launcher at least once?", 0);
             return false;
         }
         
         Log.Debug("Validation completed");
         return true;
+    }
+    
+    private void ShowMessage(string title, string message, int timeout)
+    {
+        var win = new MessageWindow(title, message, timeout);
+        win.Show(this);
     }
 }

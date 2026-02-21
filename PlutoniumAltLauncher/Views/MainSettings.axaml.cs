@@ -2,8 +2,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
-using Avalonia.Threading;
-using Serilog;
 
 namespace PlutoniumAltLauncher.Views;
 
@@ -20,11 +18,11 @@ public partial class MainSettings : Window
         T6FolderPath.Text = AppConfigManager.Current.T6FolderPath;
         IW5FolderPath.Text = AppConfigManager.Current.IW5FolderPath;
         CloseAtLaunch.IsChecked = AppConfigManager.Current.CloseAtLaunch;
+        DisableBackgroundMusic.IsChecked = AppConfigManager.Current.DisableBackgroundMusic;
         
-        WindowStartupLocation = WindowStartupLocation.CenterScreen;
-        
-        Opened += (_, _) => Dispatcher.UIThread.Post(InvalidateVisual, DispatcherPriority.Render);
-    }
+        SystemDecorations = SystemDecorations.None;
+        WindowState = WindowState.FullScreen;
+        WindowStartupLocation = WindowStartupLocation.CenterScreen;    }
     
     private async Task<string> SelectFile()
     {
@@ -113,6 +111,12 @@ public partial class MainSettings : Window
         var checkBox = (CheckBox)sender!;
         AppConfigManager.Current.CloseAtLaunch = checkBox.IsChecked!.Value;
     }
+    
+    private void DisableBackgroundMusic_OnCheck(object? sender, RoutedEventArgs e)
+    {
+        var checkBox = (CheckBox)sender!;
+        AppConfigManager.Current.DisableBackgroundMusic = checkBox.IsChecked!.Value;
+    }
 
     private void SaveConfig_OnClick(object? sender, RoutedEventArgs e)
     {
@@ -123,6 +127,7 @@ public partial class MainSettings : Window
         AppConfigManager.Current.T6FolderPath = T6FolderPath.Text!;
         AppConfigManager.Current.IW5FolderPath = IW5FolderPath.Text!;
         AppConfigManager.Current.CloseAtLaunch = CloseAtLaunch.IsChecked!.Value;
+        AppConfigManager.Current.DisableBackgroundMusic = DisableBackgroundMusic.IsChecked!.Value;
         AppConfigManager.Save();
         Close(); //Closes window
     }

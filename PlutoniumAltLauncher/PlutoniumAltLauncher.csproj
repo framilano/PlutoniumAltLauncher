@@ -36,15 +36,15 @@
 
         <None Include="Native\SDL3.dll" CopyToOutputDirectory="Always" Link="SDL3.dll" /> <!-- Manually including SDL3.dll -->
 
-        <Compile Update="Views\MainWindowGamepad.axaml.cs">
+        <Compile Update="Views\MainWindowInputHandler.axaml.cs">
             <DependentUpon>MainWindow.axaml</DependentUpon>
         </Compile>
-        <Compile Update="Views\MainWindowBackgroundMusic.axaml.cs">
+        <Compile Update="Views\MainWindowBackgroundMusicHandler.axaml.cs">
           <DependentUpon>MainWindow.axaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
-        <Compile Update="Views\ErrorWindowGamepad.axaml.cs">
-          <DependentUpon>ErrorWindow.axaml</DependentUpon>
+        <Compile Update="Views\MessageWindowInputHandler.axaml.cs">
+          <DependentUpon>MessageWindow.axaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>

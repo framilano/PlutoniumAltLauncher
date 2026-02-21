@@ -7,6 +7,7 @@
         x:Class="PlutoniumAltLauncher.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
+        KeyDown="OnKeyDown"
         Title="PlutoniumAltLauncher">
 
     <Design.DataContext>
@@ -95,11 +96,12 @@
         </Button>
         
         <Canvas Grid.Row="0" Grid.Column="1">
-            <Button Content="⚙️"
+            <Button
                     Canvas.Right="20"
                     Canvas.Top="20"
-                    Click="OpenSettings_OnClick"
-                    FontSize="20"/>
+                    Click="OpenSettings_OnClick">
+            <Image Width="40" Height="40" Source="avares://PlutoniumAltLauncher/Assets/images/tool.png" Stretch="UniformToFill" />
+            </Button>
         </Canvas>
         <!-- <TextBlock HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Name="ButtonViewer">Waiting for presses</TextBlock> -->
         <!--<Button HorizontalAlignment="Center" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Click="CloseProgram_OnClick">Close</Button>-->

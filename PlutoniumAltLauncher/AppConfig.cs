@@ -25,7 +25,7 @@ public static class AppConfigManager
         public string T6FolderPath { get; set; } = "";
         public string IW5FolderPath { get; set; } = "";
         public bool   CloseAtLaunch { get; set; }
-        
+        public bool   DisableBackgroundMusic { get; set; }
     }
     
     public static AppConfig Current { get; set; } = new();

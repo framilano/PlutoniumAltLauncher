@@ -9,29 +9,29 @@ public class Gamepad
     //Event sent to UI thread
     public event EventHandler<string>? GamepadButtonPressed;
 
-    public bool ShouldBeKilled = false;
+    private bool _shouldBeKilled;
 
     public void StopGamepadHandling()
     {
-        ShouldBeKilled = true;
+        _shouldBeKilled = true;
     }
 
 
-    public void StartGamepadHandling()
+    public void StartGamepadHandling(string actor)
     {
-        ShouldBeKilled = false;
+        _shouldBeKilled = false;
         Task.Run(async () =>
         {
             SDL.Init(SDL.InitFlags.Gamepad);
             IntPtr gamepad = 0;
             
             //Up, down, left, right, south, east
-            bool[] prevBtns = [false, false, false, false, false, false];
-            bool[] curBtns = [false, false, false, false, false, false];
+            bool[] prevBtns = [true, true, true, true, true, true]; //Default to true, so when switching window you still have to release the button before registering a button pressed in this thread
+            bool[] curBtns = [true, true, true, true, true, true];
             
             while (true)
             {
-                if (ShouldBeKilled) return; //Completely stops polling if should be killed is set
+                if (_shouldBeKilled) return; //Completely stops polling if should be killed is set
                 SDL.UpdateGamepads();
                 if (!SDL.GamepadConnected(gamepad))
                 {
@@ -47,12 +47,12 @@ public class Gamepad
                 curBtns[4] = SDL.GetGamepadButton(gamepad, SDL.GamepadButton.South);
                 curBtns[5] = SDL.GetGamepadButton(gamepad, SDL.GamepadButton.East);
 
-                for (var i = 0; i < prevBtns.Length; i++)
+                for (var i = 0; i < prevBtns.Length; i++)   //Button press is detected when previous it wasn't pressed and now it is
                 {
                     if (!prevBtns[i] && curBtns[i])
                     {
                         GamepadButtonPressed?.Invoke(null, i.ToString());
-                        //Console.WriteLine("Pressed " + i);
+                        Console.WriteLine("Pressed " + i + " on " + actor);
                     }
                     prevBtns[i] = curBtns[i];
                 }

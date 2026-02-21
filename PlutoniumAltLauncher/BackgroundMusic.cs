@@ -15,6 +15,13 @@ public class BackgroundMusic
 
     private MediaPlayer? _player;
     
+    private bool _shouldBeKilled;
+
+    public void StopBackgroundMusicHandling()
+    {
+        _shouldBeKilled = true;
+    }
+    
     public void ChangeSong(string songName)
     {
         SongToPlay = songName;
@@ -25,12 +32,14 @@ public class BackgroundMusic
     
     public void StartBackgroundMusicHandling()
     {
+        _shouldBeKilled = false;
         Task.Run(async () =>
         {
             Core.Initialize(); // loads native VLC
             
             while (true)
             {
+                if (_shouldBeKilled) return;
                 while (!IsActive) await Task.Delay(100); //Window isn't active, stop playing
                 await PlayMusic();
             }
@@ -52,7 +61,7 @@ public class BackgroundMusic
 
         //Console.WriteLine("Playing...");
 
-        while (IsActive && _player.IsPlaying) await Task.Delay(100);
+        while (IsActive && _player.IsPlaying  && !_shouldBeKilled) await Task.Delay(100);
         _player.Stop();
     }
 }
