@@ -69,7 +69,9 @@ robocopy PlutoniumAltLauncher/Native/libvlc PlutoniumAltLauncher/bin/Release/net
 - [X] Option to close Launcher automatically when launching Plutonium
 - [X] Change music (and loop it) when changing game in main menu
 - [X] Check if player started Plutonium at least once
-- [ ] Black screen with Mangohud
 - [ ] Replace that horrible settings icon
 - [ ] Better UI in settings, controller navigation?
-- [ ] Reduce RAM usage
+
+## Issues
+- Black screen with Mangohud
+- An excessive RAM usage
