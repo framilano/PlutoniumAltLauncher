@@ -24,6 +24,7 @@ public class BackgroundMusic
     
     public void ChangeSong(string songName)
     {
+        if (songName == SongToPlay) return;
         SongToPlay = songName;
         IsActive = false;
         _player?.Stop();
