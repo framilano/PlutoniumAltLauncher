@@ -56,7 +56,7 @@ There are some editable fields in `config.json`:
 
 ## Building
 ```
-dotnet publish -c Release -r win-x64
+dotnet publish -c Release -r win-x64 --self-contained true
 robocopy PlutoniumAltLauncher/Native/libvlc PlutoniumAltLauncher/bin/Release/net10.0/win-x64/publish/libvlc /MIR
 ```
 
