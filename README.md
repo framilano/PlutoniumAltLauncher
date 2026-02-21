@@ -6,7 +6,7 @@ It has controller, touchscreen, mouse/kb support and works on both Linux (throug
 
 The main objective is giving a shortcut to play offline Call of Duty Plutonium-supported titles.
 
-**Oh btw, I'm not affiliated with the Plutonium in any capability, show some gratitude to the devs!**
+**Oh btw, I'm not affiliated with the Plutonium in any capacity, show some gratitude to the devs!**
 
 <img width="2559" height="1439" alt="immagine" src="https://github.com/user-attachments/assets/02d00751-f51d-4982-bcec-ba0b18f495fe" />
 
