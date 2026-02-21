@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using Serilog;
 
 namespace PlutoniumAltLauncher.Views;
@@ -20,6 +21,7 @@ public partial class MainWindow : Window
         //Init MainWindowGamepad
         InitGamepadHandling();
         
+        Opened += (_, _) => Dispatcher.UIThread.Post(InvalidateVisual, DispatcherPriority.Render);
     }
     
     private void OpenSettings_OnClick(object? sender, RoutedEventArgs e)

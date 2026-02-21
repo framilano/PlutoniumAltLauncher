@@ -6,27 +6,32 @@ namespace PlutoniumAltLauncher;
 
 public class Gamepad
 {
-    //Defines if pool for button inputs is active or not
-    public bool IsActive { get; set; }
-    
     //Event sent to UI thread
     public event EventHandler<string>? GamepadButtonPressed;
-    
+
+    public bool ShouldBeKilled = false;
+
+    public void StopGamepadHandling()
+    {
+        ShouldBeKilled = true;
+    }
+
+
     public void StartGamepadHandling()
     {
+        ShouldBeKilled = false;
         Task.Run(async () =>
         {
             SDL.Init(SDL.InitFlags.Gamepad);
             IntPtr gamepad = 0;
             
-            //Up, down, left, right, south
-            bool[] prevBtns = [false, false, false, false, false];
-            bool[] curBtns = [false, false, false, false, false];
+            //Up, down, left, right, south, east
+            bool[] prevBtns = [false, false, false, false, false, false];
+            bool[] curBtns = [false, false, false, false, false, false];
             
             while (true)
             {
-                while (!IsActive)  await Task.Delay(1000);  //Window isn't active, stop polling
-                
+                if (ShouldBeKilled) return; //Completely stops polling if should be killed is set
                 SDL.UpdateGamepads();
                 if (!SDL.GamepadConnected(gamepad))
                 {
@@ -40,6 +45,7 @@ public class Gamepad
                 curBtns[3] = SDL.GetGamepadButton(gamepad, SDL.GamepadButton.DPadRight);
                 
                 curBtns[4] = SDL.GetGamepadButton(gamepad, SDL.GamepadButton.South);
+                curBtns[5] = SDL.GetGamepadButton(gamepad, SDL.GamepadButton.East);
 
                 for (var i = 0; i < prevBtns.Length; i++)
                 {

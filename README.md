@@ -9,7 +9,7 @@ A [Plutonium](https://plutonium.pw/) launcher that allows you to play offline, m
 ## Building
 ```
 dotnet publish -c Release -r win-x64
-robocopy PlutoniumAltLauncher/Native/libvlc PlutoniumAltLauncher/bin/Release/net9.0/win-x64/publish/libvlc /MIR
+robocopy PlutoniumAltLauncher/Native/libvlc PlutoniumAltLauncher/bin/Release/net10.0/win-x64/publish/libvlc /MIR
 ```
 ## Todo
 - [X] Add Controller support

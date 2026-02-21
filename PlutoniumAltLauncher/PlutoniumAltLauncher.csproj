@@ -28,22 +28,23 @@
         <PackageReference Include="Serilog" Version="4.3.0" />
         <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
         <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-
-        <Compile Update="Views\MainWindowGamepad.axaml.cs">
-            <DependentUpon>MainWindow.axaml</DependentUpon>
-        </Compile>
-        
-        
         <AvaloniaResource Include="Assets\avalonia-logo.ico" />
         <AvaloniaResource Include="Assets\images\**" /> <!-- Images are included inside the executable (and available on the avalonia side) -->
-        <Content Include="Assets\music\**"> <!-- Music files are outside of avalonia framework resources, so we need to import them separately -->
+        <Content Include="Assets\**"> <!-- Music files are outside of avalonia framework resources, so we need to import them separately -->
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
 
         <None Include="Native\SDL3.dll" CopyToOutputDirectory="Always" Link="SDL3.dll" /> <!-- Manually including SDL3.dll -->
 
+        <Compile Update="Views\MainWindowGamepad.axaml.cs">
+            <DependentUpon>MainWindow.axaml</DependentUpon>
+        </Compile>
         <Compile Update="Views\MainWindowBackgroundMusic.axaml.cs">
           <DependentUpon>MainWindow.axaml</DependentUpon>
+          <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\ErrorWindowGamepad.axaml.cs">
+          <DependentUpon>ErrorWindow.axaml</DependentUpon>
           <SubType>Code</SubType>
         </Compile>
     </ItemGroup>

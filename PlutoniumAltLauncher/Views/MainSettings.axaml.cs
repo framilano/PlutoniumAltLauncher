@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using Serilog;
 
 namespace PlutoniumAltLauncher.Views;
@@ -21,6 +22,8 @@ public partial class MainSettings : Window
         CloseAtLaunch.IsChecked = AppConfigManager.Current.CloseAtLaunch;
         
         WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        
+        Opened += (_, _) => Dispatcher.UIThread.Post(InvalidateVisual, DispatcherPriority.Render);
     }
     
     private async Task<string> SelectFile()
