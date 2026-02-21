@@ -169,12 +169,12 @@ public partial class MainWindow
         //Activated and Deactivated are events fire by this Window
         Activated += (_, _) =>
         {
-            Console.WriteLine("Enabled gamepad on MainWindow");
+            //Console.WriteLine("Enabled gamepad on MainWindow");
             _gamepad.StartGamepadHandling("MainWindow");
         };
         Deactivated += (_, _) =>
         {
-            Console.WriteLine("Disabled gamepad on MainWindow");
+            //Console.WriteLine("Disabled gamepad on MainWindow");
             _gamepad.StopGamepadHandling();
         };
 

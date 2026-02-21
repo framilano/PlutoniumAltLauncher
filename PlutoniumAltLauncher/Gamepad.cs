@@ -35,7 +35,7 @@ public class Gamepad
                 SDL.UpdateGamepads();
                 if (!SDL.GamepadConnected(gamepad))
                 {
-                    if (!string.IsNullOrEmpty(SDL.GetGamepadName(gamepad))) Console.WriteLine($"Gamepad {SDL.GetGamepadName(gamepad)} is now disconnected");
+                    //if (!string.IsNullOrEmpty(SDL.GetGamepadName(gamepad))) Console.WriteLine($"Gamepad {SDL.GetGamepadName(gamepad)} is now disconnected");
                     gamepad = await PollOpenGamepad();
                 }
                 
@@ -52,7 +52,7 @@ public class Gamepad
                     if (!prevBtns[i] && curBtns[i])
                     {
                         GamepadButtonPressed?.Invoke(null, i.ToString());
-                        Console.WriteLine("Pressed " + i + " on " + actor);
+                        //Console.WriteLine("Pressed " + i + " on " + actor);
                     }
                     prevBtns[i] = curBtns[i];
                 }
