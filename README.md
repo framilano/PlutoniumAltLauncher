@@ -1,7 +1,7 @@
 # PlutoniumAltLauncher 
 #### *Plutonium Alternative Launcher*
 
-A [Plutonium](https://plutonium.pw/) launcher that allows you to play offline, mainly developed with Steam Deck in mind and powered by [Avalonia](https://avaloniaui.net/).
+A [Plutonium](https://plutonium.pw/) launcher that allows you to play while being offline, mainly developed with Steam Deck in mind and powered by [Avalonia](https://avaloniaui.net/).
 It has controller, touchscreen, mouse/kb support and works on both Linux (through Wine/Proton) and Windows.
 
 The main objective is giving a shortcut to play offline Call of Duty Plutonium-supported titles.
