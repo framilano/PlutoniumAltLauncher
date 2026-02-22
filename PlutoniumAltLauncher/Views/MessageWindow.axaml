@@ -9,7 +9,7 @@
         FontSize="60">
         <Grid RowDefinitions="Auto, Auto" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock TextAlignment="Center" Grid.Row="0" Padding="30" Name="Message">Placeholder</TextBlock>
-                <Button HorizontalAlignment="Center" Click="Quit" Grid.Row="1" >Ok</Button>
+                <Button IsVisible="False" Name="ConfirmButton" HorizontalAlignment="Center" Click="Quit" Grid.Row="1" ></Button>
         </Grid>
 
 </Window>

@@ -7,11 +7,17 @@ namespace PlutoniumAltLauncher.Views;
 
 public partial class MessageWindow : Window
 {
-    public MessageWindow(string title, string message, int timeout)
+    public MessageWindow(string title, string message, int timeout, string? confirmButtonMessage)
     {
         InitializeComponent();
         Title = title;
         Message.Text = message;
+
+        if (confirmButtonMessage is not null)
+        {
+            ConfirmButton.IsVisible = true;
+            ConfirmButton.Content = confirmButtonMessage;
+        }
         
         //Init MessageWindowGamepad
         InitGamepadHandling();

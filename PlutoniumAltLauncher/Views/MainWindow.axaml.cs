@@ -94,26 +94,34 @@ public partial class MainWindow : Window
             return;
         }
         
-        ShowMessage("Wait please", "Launching...", 10);
+        ShowMessage("Wait please", "Launching...", 10, null);
     }
 
     private bool ValidateButtonInput(string gameName, string gamePath, string exe)
     {
         if (gameName != "online" && string.IsNullOrEmpty(gamePath))
         {
-            ShowMessage("⚠️ Invalid gamepath selected", "⚠️\nCheck your game paths in settings", 0);
+            ShowMessage("⚠️ Invalid gamepath selected", "⚠️\nCheck your game paths in settings", 
+                0, "Ok"
+            );
             return false;
         }
         
         if (string.IsNullOrEmpty(exe))
         {
-            ShowMessage("⚠️ Invalid executable selected", "️⚠️\nCheck your plutonium.exe path in settings", 0);
+            ShowMessage(
+                "⚠️ Invalid executable selected", "️⚠️\nCheck your plutonium.exe path in settings", 
+                0, "Ok"
+            );
             return false;
         }
 
         if (!File.Exists(exe))
         {
-            ShowMessage("⚠️ Plutonium installation not found", "️⚠️\nI can't find your Plutonium installation\nDid you boot the official launcher at least once?", 0);
+            ShowMessage(
+                "⚠️ Plutonium installation not found", "️⚠️\nI can't find your Plutonium installation\nDid you boot the official launcher at least once?", 
+                0, "Ok"
+            );
             return false;
         }
         
@@ -121,9 +129,9 @@ public partial class MainWindow : Window
         return true;
     }
     
-    private void ShowMessage(string title, string message, int timeout)
+    private void ShowMessage(string title, string message, int timeout, string? confirmButtonMessage)
     {
-        var win = new MessageWindow(title, message, timeout);
+        var win = new MessageWindow(title, message, timeout, confirmButtonMessage);
         win.Show(this);
     }
 }

@@ -29,7 +29,7 @@ public partial class MainWindow
     private void AddHighlight(Button element)
     {
         
-        //Telling the backgroundmusic the change song
+        //Telling the backgroundmusic to change song
         ChangeMusic(element.Name!.ToLower().Replace("btn", ""));
         
         foreach (var keyPair in _elementsDict)
@@ -139,7 +139,7 @@ public partial class MainWindow
     
     /****************** KEYBOARD HANDLING *****************/
     
-    private void OnKeyDown(object? sender, KeyEventArgs e)
+    private void OnKeyDown(object? _, KeyEventArgs e)
     {
         if (e.Key == Key.Escape) Close();
         
@@ -166,7 +166,7 @@ public partial class MainWindow
         _gamepad.GamepadButtonPressed += OnGamepadButtonPressedOnMainWindow;
         
         //When the window goes out of focus, tell the gamepad handler to stop polling for events
-        //Activated and Deactivated are events fire by this Window
+        //Activated and Deactivated are events fired by this Window
         Activated += (_, _) =>
         {
             //Console.WriteLine("Enabled gamepad on MainWindow");
@@ -177,8 +177,6 @@ public partial class MainWindow
             //Console.WriteLine("Disabled gamepad on MainWindow");
             _gamepad.StopGamepadHandling();
         };
-
-        AddHighlight(OnlineBtn);
     }
 
     private Gamepad _gamepad;
