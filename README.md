@@ -74,5 +74,5 @@ robocopy PlutoniumAltLauncher/Native/libvlc PlutoniumAltLauncher/bin/Release/net
 - [ ] Better UI in settings, controller navigation?
 
 ## Issues
-- Black screen with Mangohud
-- An excessive RAM usage
+- Blank screen on some windows randomly while using Gamescope, just moving the pointer fixes it, weird
+- Black screen with Mangohud enabled on Gamescope
