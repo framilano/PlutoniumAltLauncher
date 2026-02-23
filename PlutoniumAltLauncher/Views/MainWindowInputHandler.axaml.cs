@@ -44,7 +44,7 @@ public partial class MainWindow
 
     private static void RemoveHighlight(Button element)
     {
-        element.Opacity = 0.3;
+        element.Opacity = 0.2;
     }
 
     private void ComputeHighlightedElement(int input)

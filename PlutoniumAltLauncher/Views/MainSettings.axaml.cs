@@ -22,7 +22,8 @@ public partial class MainSettings : Window
         
         SystemDecorations = SystemDecorations.None;
         WindowState = WindowState.FullScreen;
-        WindowStartupLocation = WindowStartupLocation.CenterScreen;    }
+        WindowStartupLocation = WindowStartupLocation.CenterScreen;    
+    }
     
     private async Task<string> SelectFile()
     {
